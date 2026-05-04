@@ -1,0 +1,119 @@
+-- Ej 1
+SELECT 
+	usuarios.id, 
+	usuarios.nombre, 
+	apellido, 
+	fecha_nacimiento, 
+	provincias.nombre  
+FROM usuarios 
+inner join provincias on id_provincia = provincias.id
+ORDER BY 
+	id asc;
+	
+-- Ej 3
+select 
+	usuarios.nombre,
+	usuarios.apellido 
+from usuarios
+order by 
+	apellido asc;
+	
+-- Ej 5
+select 
+	CONCAT(usuarios.apellido, ', ', usuarios.nombre) as nombre_completo
+from usuarios
+order by 
+	usuarios.apellido asc;
+	
+-- Ej 7
+SELECT
+	usuarios.id, 
+	usuarios.nombre, 
+	apellido, 
+	fecha_nacimiento, 
+	provincias.nombre  
+FROM usuarios 
+inner join provincias on id_provincia = provincias.id
+ORDER BY 
+	id asc
+limit 3;
+
+-- Ej 9
+select 
+	beneficios.id,
+	beneficios.nombre,
+	comercios.nombre as comercio,
+	beneficios.descripcion_corta,
+	beneficios.descuento 
+from beneficios
+inner join comercios on beneficios.id_comercio = comercios.id
+where beneficios.activo = true;
+
+-- Ej 11
+select 
+	beneficios.id,
+	beneficios.nombre,
+	comercios.nombre as comercio,
+	beneficios.descripcion_corta,
+	beneficios.descuento 
+from beneficios
+inner join comercios on beneficios.id_comercio = comercios.id
+where beneficios.descuento <= 10 or beneficios.descuento >= 50;
+
+-- Ej 13
+select 
+	comercios.nombre as comercio
+from comercios
+where comercios.nombre  like '%sa';
+
+-- Ej 15
+select 
+	usuarios.nombre as usuario
+from usuarios
+where usuarios.nombre  like '_a%';
+
+-- Ej 17
+select 
+	usuarios.nombre,
+	usuarios.apellido 
+from usuarios
+where usuarios.apellido not in ('Gonzalez', 'Ruiz', 'Gomez');
+
+-- Ej 19
+SELECT DISTINCT 
+	nombre, 
+	descuento 
+FROM beneficios 
+WHERE id_comercio IN (
+	SELECT 
+		id 
+	FROM comercios 
+	WHERE activo = true
+) 
+ORDER BY 
+	nombre ASC, 
+	descuento desc
+	
+-- Ej 21
+select 
+	beneficios.nombre,
+	comercios.nombre as comercio,
+	beneficios.descripcion_corta,
+	beneficios.descuento 
+from beneficios
+inner join comercios on beneficios.id_comercio = comercios.id
+order by 
+	beneficios.descuento desc
+limit 5;
+
+-- Ej 23
+SELECT 
+	usuarios.nombre, 
+	apellido, 
+	fecha_nacimiento, 
+	provincias.nombre  
+FROM usuarios 
+inner join provincias on id_provincia = provincias.id
+where extract(month from fecha_nacimiento) = 5
+order by 
+	extract(day from fecha_nacimiento) asc;
