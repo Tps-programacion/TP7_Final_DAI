@@ -1,0 +1,80 @@
+--2--
+select 
+nombre,
+apellido
+from usuarios
+--4--
+select 
+nombre,
+apellido
+from usuarios
+order by 
+apellido,
+nombre
+--6--
+select distinct 
+nombre
+from usuarios
+order by 
+usuarios
+--8--
+SELECT 
+nombre,
+apellido,
+LENGTH(nombre) AS largo_nombre
+FROM usuarios
+ORDER BY 
+largo_nombre desc
+--10--
+select 
+nombre
+descipcion_corta,
+descuento
+from beneficios
+where activo = true 
+and descuento >= 20
+--12--
+select
+nombre
+descripcion
+from comercios
+where nombre like 'm%'
+--14--
+select
+nombre
+descripcion
+from comercios
+where nombre like '%super%'
+--16--
+SELECT 
+nombre
+apellido
+FROM usuarios
+WHERE apellido IN ('Gonzalez', 'Ruiz', 'Gomez')
+--18--
+select 
+beneficios,
+descripcion_corta,
+descuento
+from beneficios
+where id_comercio in (select 
+id 
+from comercios 
+where activo = TRUE)
+--20--
+-- 20. Obtener los beneficios que NO pertenecen a comercios activos
+
+SELECT *
+FROM beneficios
+WHERE id_comercio NOT IN (
+    SELECT id
+    FROM comercios
+    WHERE activo = TRUE
+);
+--22--
+select
+nombre
+apellido
+from usuarios
+where extract(year from fecha_nacimiento) = 1981
+--24--
